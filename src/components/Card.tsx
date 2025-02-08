@@ -26,9 +26,10 @@ interface CardProps {
     description?: string;
     image?: string;
     link?: string;
+    htmlTitle?: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, description, image, link }: CardProps) => {
+const Card: React.FC<CardProps> = ({ title, description, image, link, htmlTitle }: CardProps) => {
     const router = useRouter();
 
     const handleClick = () => {
@@ -41,6 +42,7 @@ const Card: React.FC<CardProps> = ({ title, description, image, link }: CardProp
         <div 
             className="flex flex-col items-start justify-center text-white bg-blue-800/50 rounded-lg p-4 hover:bg-blue-800/70 transition-all duration-300 hover:cursor-pointer"
             onClick={link ? () => handleClick() : undefined}
+            title={htmlTitle ? htmlTitle : title}
         >
             <div className="flex flex-row items-center justify-between w-full">
                 <h1 className="text-2xl font-bold">{title}</h1>
