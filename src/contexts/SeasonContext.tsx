@@ -10,7 +10,7 @@ interface SeasonContextData {
     isLoading: boolean;
     error: string | null;
     fetchSeasons: (page?: number, size?: number, force?: boolean) => Promise<void>;
-    fetchSeasonById: (id: string) => Promise<void>;
+    fetchSeasonById: (id: number) => Promise<void>;
     clearCurrentSeason: () => void;
 }
 
