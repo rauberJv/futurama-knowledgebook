@@ -13,8 +13,9 @@ export default function SeasonPage() {
     const { isLoading, error, currentSeason, fetchSeasonById } = useSeason();
 
     useEffect(() => {
+        if (currentSeason?.id === Number(params.id)) return;
         fetchSeasonById(params.id as string);
-    }, [fetchSeasonById, params.id]);
+    }, [fetchSeasonById, params.id, currentSeason]);
 
     if (isLoading) {
         return (

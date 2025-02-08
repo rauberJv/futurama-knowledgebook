@@ -40,7 +40,7 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
         }
     }, [seasons]);
 
-    const fetchSeasonById = useCallback(async (id: string) => {
+    const fetchSeasonById = useCallback(async (id: number) => {
         try {
             setIsLoading(true);
             setError(null);

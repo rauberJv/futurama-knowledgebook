@@ -6,7 +6,7 @@ const getAllSeasons = async (page: number = 1, size: number = 50): Promise<Seaso
     return data;
 }
 
-const getSeasonById = async (id: string): Promise<SeasonDTO> => {
+const getSeasonById = async (id: number): Promise<SeasonDTO> => {
     const response = await fetch(`https://futuramaapi.com/api/seasons/${id}`);
     const data = await response.json();
     return data;
