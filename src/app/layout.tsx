@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,6 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.className} antialiased`}>
+        <header className="flex flex-row items-center justify-center p-4">
+          <nav className="flex flex-row items-center justify-center">
+            <Link href="/">Home</Link>
+          </nav>
+        </header>
         <main className="max-w-7xl min-h-screen p-4 mx-auto">
           {children}
         </main>
