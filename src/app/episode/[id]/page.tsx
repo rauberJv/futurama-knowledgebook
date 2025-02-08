@@ -18,8 +18,9 @@ const EpisodePage = () => {
     const { currentSeason } = useSeason();
 
     useEffect(() => {
+        if (currentEpisode?.id === Number(params.id)) return;
         fetchEpisodeById(params.id as string);
-    }, [fetchEpisodeById, params.id]);
+    }, [fetchEpisodeById, params.id, currentEpisode]);
 
     if (isLoading) {
         return (
