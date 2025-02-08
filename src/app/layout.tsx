@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={`${roboto.className} antialiased`}>
         <header className="flex flex-row items-center justify-center p-4">
           <nav className="flex flex-row items-center justify-center">
-            <Link href="/">Home</Link>
+            <Link href="/" className="text-white hover:text-blue-700 font-bold text-xl transition-colors duration-300">Fly Back Home</Link>
           </nav>
         </header>
         <AppProvider>

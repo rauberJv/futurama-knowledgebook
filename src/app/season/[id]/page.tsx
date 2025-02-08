@@ -43,7 +43,7 @@ export default function SeasonPage() {
 
     return (
         <div className="container w-full">
-            <h1 className="text-3xl font-bold mb-6">Season {currentSeason.id}</h1>
+            <h1 className="text-3xl font-bold mb-6">Season <span className="font-bold text-blue-500">{currentSeason.id}</span></h1>
             <div className="grid gap-4">
                 <h2 className="text-2xl font-semibold mb-4">Episodes</h2>
                 <EpisodeDisplay episodeList={currentSeason.episodes} />

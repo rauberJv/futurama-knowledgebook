@@ -25,7 +25,7 @@ const SeasonDisplay: React.FC = () => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
             {seasons?.items.map((season: SeasonDTO) => (
-                <Card key={season.id} title={`Season ${season.id}`} link={`/season/${season.id}`} />
+                <Card key={season.id} title={`Season ${season.id}`} description={`${season.episodes.length} Episodes`} link={`/season/${season.id}`} />
             ))}
         </div>
     )

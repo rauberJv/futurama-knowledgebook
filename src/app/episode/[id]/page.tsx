@@ -51,17 +51,41 @@ const EpisodePage = () => {
     }
 
     return (
-        <div className="flex flex-col items-start gap-y-4 w-full">
-            <h1 className="text-3xl font-bold mb-6">Futurama {currentEpisode?.broadcastCode} - {currentEpisode?.name}</h1>
-            <div className="grid gap-4">
+        <div className="flex flex-col items-start gap-y-8 w-full">
+            <h1 className="text-3xl font-bold">Futurama {currentEpisode?.broadcastCode} - {currentEpisode?.name}</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
                 <Card
                     title={currentEpisode?.name ?? ''}
-                    description={generateDescription(currentEpisode)}
+                    description={`Episode Name`}
+                />
+                <Card
+                    title={`${currentEpisode?.season.id}`}
+                    description={`Episode Season`}
+                />
+                <Card
+                    title={`${currentEpisode?.number}`}
+                    description={`Episode Number`}
+                />
+                <Card
+                    title={`${currentEpisode?.airDate}`}
+                    description={`Episode Air Date`}
+                />
+                <Card
+                    title={`${currentEpisode?.broadcastCode}`}
+                    description={`Episode Broadcast Code`}
+                />
+                <Card
+                    title={`${currentEpisode?.duration}`}
+                    description={`Episode Duration`}
+                />
+                <Card
+                    title={`${currentEpisode?.productionCode}`}
+                    description={`Episode Production Code`}
                 />
             </div>
             {currentSeason && (
                 <div className='flex flex-col items-start gap-y-4 w-full'>
-                    <h2 className='text-2xl font-semibold mb-4'>Check also this other episodes from <span className='font-bold text-blue-500'>Season {currentSeason?.id}</span></h2>
+                    <h2 className='text-2xl font-semibold'>Check also this other episodes from <span className='font-bold text-blue-500'>Season {currentSeason?.id}</span></h2>
                     <EpisodeDisplay episodeList={currentSeason?.episodes ?? []} />
                 </div>
             )}
