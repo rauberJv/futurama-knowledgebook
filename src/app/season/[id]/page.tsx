@@ -4,6 +4,9 @@ import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import EpisodeDisplay from '@/components/EpisodeDisplay';
 import { useSeason } from '@/contexts/SeasonContext';
+import CustomMessage from '@/components/CustomMessage';
+import Spinner from '@/components/Spinner';
+import Link from 'next/link';
 
 export default function SeasonPage() {
     const params = useParams();
@@ -15,34 +18,35 @@ export default function SeasonPage() {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-            </div>
+            <CustomMessage>
+                <Spinner />
+            </CustomMessage>
         );
     }
 
     if (error) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <CustomMessage>
                 <div className="text-red-500">{error}</div>
-            </div>
+            </CustomMessage>
         );
     }
 
     if (!currentSeason) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <CustomMessage>
                 <div>Season not found</div>
-            </div>
+            </CustomMessage>
         );
     }
 
     return (
-        <div className="container mx-auto">
+        <div className="container w-full">
             <h1 className="text-3xl font-bold mb-6">Season {currentSeason.id}</h1>
             <div className="grid gap-4">
                 <h2 className="text-2xl font-semibold mb-4">Episodes</h2>
                 <EpisodeDisplay episodeList={currentSeason.episodes} />
+                <Link href={`/`} className="text-blue-500 hover:text-blue-700">Return to Home</Link>
             </div>
         </div>
     );

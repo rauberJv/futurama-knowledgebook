@@ -5,11 +5,17 @@ import { EpisodeDTO } from '@/services/episodes/dto';
 import { useParams } from 'next/navigation';
 import Card from '@/components/Card';
 import { useEpisode } from '@/contexts/EpisodeContext';
+import CustomMessage from '@/components/CustomMessage';
+import Spinner from '@/components/Spinner';
+import Link from 'next/link';
+import EpisodeDisplay from '@/components/EpisodeDisplay';
+import { useSeason } from '@/contexts/SeasonContext';
 
 const EpisodePage = () => {
 
     const params = useParams();
     const { isLoading, error, currentEpisode, fetchEpisodeById } = useEpisode();
+    const { currentSeason } = useSeason();
 
     useEffect(() => {
         fetchEpisodeById(params.id as string);
@@ -17,25 +23,25 @@ const EpisodePage = () => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-            </div>
+            <CustomMessage>
+                <Spinner />
+            </CustomMessage>
         );
     }
 
     if (error) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <CustomMessage>
                 <div className="text-red-500">{error}</div>
-            </div>
+            </CustomMessage>
         );
     }
 
     if (!currentEpisode) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <CustomMessage>
                 <div>Episode not found</div>
-            </div>
+            </CustomMessage>
         );
     }
 
@@ -44,7 +50,7 @@ const EpisodePage = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col items-start gap-y-4 w-full">
             <h1 className="text-3xl font-bold mb-6">Futurama {currentEpisode?.broadcastCode} - {currentEpisode?.name}</h1>
             <div className="grid gap-4">
                 <Card
@@ -52,6 +58,13 @@ const EpisodePage = () => {
                     description={generateDescription(currentEpisode)}
                 />
             </div>
+            {currentSeason && (
+                <div className='flex flex-col items-start gap-y-4 w-full'>
+                    <h2 className='text-2xl font-semibold mb-4'>Check also this other episodes from <span className='font-bold text-blue-500'>Season {currentSeason?.id}</span></h2>
+                    <EpisodeDisplay episodeList={currentSeason?.episodes ?? []} />
+                </div>
+            )}
+            <Link href={`/season/${currentEpisode?.season.id}`} className="text-blue-500 hover:text-blue-700">Return to Season {currentEpisode?.season.id}</Link>
         </div>
     );
 }

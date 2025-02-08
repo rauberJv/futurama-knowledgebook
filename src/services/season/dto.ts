@@ -6,7 +6,7 @@ interface SeasonEpisodeDTO {
 }
 
 interface SeasonDTO {
-    id: string;
+    id: number;
     episodes: SeasonEpisodeDTO[];
 }
 
