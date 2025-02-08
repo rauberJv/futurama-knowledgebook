@@ -9,7 +9,7 @@ interface SeasonContextData {
     currentSeason: SeasonDTO | null;
     isLoading: boolean;
     error: string | null;
-    fetchSeasons: (page?: number, size?: number) => Promise<void>;
+    fetchSeasons: (page?: number, size?: number, force?: boolean) => Promise<void>;
     fetchSeasonById: (id: string) => Promise<void>;
     clearCurrentSeason: () => void;
 }
@@ -22,7 +22,11 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchSeasons = useCallback(async (page: number = 1, size: number = 50) => {
+    const fetchSeasons = useCallback(async (page: number = 1, size: number = 50, force: boolean = false) => {
+        if (seasons && !force) {
+            return;
+        }
+
         try {
             setIsLoading(true);
             setError(null);
@@ -34,7 +38,7 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [seasons]);
 
     const fetchSeasonById = useCallback(async (id: string) => {
         try {

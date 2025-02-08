@@ -1,35 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { getSeasonById } from '@/services/season';
-import { SeasonDTO } from '@/services/season/dto';
+import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import EpisodeDisplay from '@/components/EpisodeDisplay';
+import { useSeason } from '@/contexts/SeasonContext';
 
 export default function SeasonPage() {
-    const [season, setSeason] = useState<SeasonDTO | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const params = useParams();
+    const { isLoading, error, currentSeason, fetchSeasonById } = useSeason();
 
     useEffect(() => {
-        const fetchSeason = async () => {
-            try {
-                setLoading(true);
-                const data = await getSeasonById(params.id as string);
-                setSeason(data);
-            } catch (err) {
-                setError('Failed to load season data');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+        fetchSeasonById(params.id as string);
+    }, [fetchSeasonById, params.id]);
 
-        fetchSeason();
-    }, [params.id]);
-
-    if (loading) {
+    if (isLoading) {
         return (
             <div className="flex justify-center items-center min-h-screen">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -45,7 +29,7 @@ export default function SeasonPage() {
         );
     }
 
-    if (!season) {
+    if (!currentSeason) {
         return (
             <div className="flex justify-center items-center min-h-screen">
                 <div>Season not found</div>
@@ -54,11 +38,11 @@ export default function SeasonPage() {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6">Season {season.id}</h1>
+        <div className="container mx-auto">
+            <h1 className="text-3xl font-bold mb-6">Season {currentSeason.id}</h1>
             <div className="grid gap-4">
                 <h2 className="text-2xl font-semibold mb-4">Episodes</h2>
-                <EpisodeDisplay episodeList={season.episodes} />
+                <EpisodeDisplay episodeList={currentSeason.episodes} />
             </div>
         </div>
     );
