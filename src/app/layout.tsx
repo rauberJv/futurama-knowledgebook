@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { AppProvider } from "@/contexts/AppProvider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -26,9 +27,11 @@ export default function RootLayout({
             <Link href="/">Home</Link>
           </nav>
         </header>
-        <main className="max-w-7xl min-h-screen p-4 mx-auto">
-          {children}
-        </main>
+        <AppProvider>
+          <main className="max-w-7xl min-h-screen p-4 mx-auto">
+            {children}
+          </main>
+        </AppProvider>
       </body>
     </html>
   );
