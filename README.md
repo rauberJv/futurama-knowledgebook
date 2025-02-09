@@ -7,8 +7,7 @@
 
 ## 📖 About
 
-Futurama Knowledge Book is a comprehensive web application that serves as an encyclopedia for all things Futurama. Browse through characters, episodes, and interesting facts about the beloved animated series.
-
+Futurama Knowledge Book is a comprehensive web application that serves as an encyclopedia for all things Futurama. Browse through characters, seasons and episodes.
 ## 🛠️ Built With
 
 - **[Next.js](https://nextjs.org/)** (v15.1) - React framework for production-grade applications
@@ -78,16 +77,6 @@ npm test -- --coverage
 - **Tailwind CSS**: Enables rapid UI development with utility-first approach and excellent responsive design capabilities.
 - **Jest & Testing Library**: Ensures reliable testing with a focus on user behavior and component functionality.
 - **ESLint**: Maintains code quality and consistency across the project.
-
-## 📊 Test Coverage Report
-
-Our project maintains high test coverage to ensure reliability:
-
-![Test Coverage Report](coverage/lcov-report/badge-coverage.svg)
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
